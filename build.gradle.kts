@@ -19,8 +19,15 @@ repositories {
 
 dependencies {
 	implementation("org.springframework.boot:spring-boot-starter-web")
+	implementation("org.springframework.boot:spring-boot-starter-data-jpa")
+
+
+	implementation("org.postgresql:postgresql:42.7.4")
+	implementation("org.liquibase:liquibase-core:4.31.0")
+
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
 	testRuntimeOnly("org.junit.platform:junit-platform-launcher")
+	compileOnly("org.projectlombok:lombok:1.18.36")
 }
 
 tasks.withType<Test> {

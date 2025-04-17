@@ -1,3 +1,13 @@
 spring:
   application:
     name: example
+
+  datasource:
+    url: jdbc:postgresql://localhost:5432/quick_poll_db
+    username: postgres
+    password: root
+    driver-class-name: org.postgresql.Driver
+
+  liquibase:
+    change-log: db/changelog/db.changelog-master.yml
+    enabled: true
