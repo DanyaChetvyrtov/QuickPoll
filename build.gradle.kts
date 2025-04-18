@@ -31,6 +31,8 @@ dependencies {
 	compileOnly("org.projectlombok:lombok")
 	annotationProcessor("org.projectlombok:lombok")
 
+	implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.8.6")
+
 	// Эт если нужно будет использовать его ещё и в тестах
 	// пока хз, пригодится ли, но пусть будет
 	testCompileOnly("org.projectlombok:lombok")
