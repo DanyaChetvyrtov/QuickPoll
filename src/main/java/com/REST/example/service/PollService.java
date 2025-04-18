@@ -3,6 +3,7 @@ package com.REST.example.service;
 import com.REST.example.dto.PollRequest;
 import com.REST.example.model.Option;
 import com.REST.example.model.Poll;
+import com.REST.example.model.exception.ResourceNotFoundException;
 import com.REST.example.repository.OptionRepository;
 import com.REST.example.repository.PollRepository;
 import org.springframework.stereotype.Service;
@@ -10,7 +11,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.NoSuchElementException;
 
 @Service
 @Transactional(readOnly = true)
@@ -31,7 +31,7 @@ public class PollService {
 
     public Poll getById(Long pollId) {
         return pollRepository.findById(pollId).orElseThrow(
-                () -> new NoSuchElementException("Poll not found with id: " + pollId)
+                () -> new ResourceNotFoundException("Poll not found with id: " + pollId)
         );
     }
 
@@ -54,11 +54,18 @@ public class PollService {
 
     @Transactional
     public Poll update(Poll poll) {
+        pollIsExist(poll.getId());
         return pollRepository.save(poll);
     }
 
     @Transactional
     public void delete(Long pollId) {
+        pollIsExist(pollId);
         pollRepository.deleteById(pollId);
+    }
+
+    private void pollIsExist(Long pollId) {
+        if (!pollRepository.existsById(pollId))
+            throw new ResourceNotFoundException("Poll not found with id: " + pollId);
     }
 }

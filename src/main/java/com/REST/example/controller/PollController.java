@@ -1,18 +1,18 @@
 package com.REST.example.controller;
 
-import com.REST.example.dto.OptionRequest;
 import com.REST.example.dto.PollRequest;
 import com.REST.example.model.Poll;
 import com.REST.example.service.PollService;
+import com.REST.example.validation.OnCreate;
+import jakarta.validation.Valid;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.transaction.annotation.Transactional;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
-import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -34,7 +34,7 @@ public class PollController {
     }
 
     @PostMapping("/polls")
-    public ResponseEntity<Poll> createPoll(@RequestBody PollRequest pollRequest) {
+    public ResponseEntity<Poll> createPoll(@RequestBody @Validated(OnCreate.class) PollRequest pollRequest) {
         Poll res = pollService.addPoll(pollRequest);
 
         HttpHeaders responseHeaders = new HttpHeaders();
