@@ -6,6 +6,7 @@ import com.REST.example.model.exception.ResourceNotFoundException;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -45,7 +46,7 @@ public class RestHandler {
         errorDetails.setTimeStamp(new Date().getTime());
 
         List<FieldError> fieldErrors = ex.getBindingResult().getFieldErrors();
-        for(FieldError fieldError : fieldErrors) {
+        for (FieldError fieldError : fieldErrors) {
             List<ValidationError> validationErrorList = errorDetails.getErrors()
                     .computeIfAbsent(fieldError.getField(), k -> new ArrayList<>());
 
@@ -54,6 +55,21 @@ public class RestHandler {
             validationError.setMessage(fieldError.getDefaultMessage());
             validationErrorList.add(validationError);
         }
+
+        return new ResponseEntity<>(errorDetails, HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(HttpMessageNotReadableException.class)
+    public ResponseEntity<?> handleHttpMessageNotReadableException(
+            HttpMessageNotReadableException ex, HttpServletRequest request
+    ) {
+        ErrorDetails errorDetails = new ErrorDetails();
+
+        errorDetails.setTitle("Message not readable");
+        errorDetails.setStatus(HttpStatus.BAD_REQUEST.value());
+        errorDetails.setDetails(ex.getMessage());
+        errorDetails.setDeveloperMessage(ex.getClass().getName());
+        errorDetails.setTimeStamp(new Date().getTime());
 
         return new ResponseEntity<>(errorDetails, HttpStatus.BAD_REQUEST);
     }

@@ -2,6 +2,7 @@ package com.REST.example.model;
 
 import com.REST.example.validation.OnCreate;
 import com.REST.example.validation.OnUpdate;
+import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
@@ -18,6 +19,7 @@ import java.util.Set;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Schema(description = "API response", example = " ")
 public class Poll {
     @Id
     @Column(name = "poll_id")

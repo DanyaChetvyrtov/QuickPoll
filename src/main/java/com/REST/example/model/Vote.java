@@ -1,5 +1,6 @@
 package com.REST.example.model;
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -10,6 +11,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Schema(description = "API response", example = " ")
 public class Vote {
     @Id
     @Column(name = "vote_id")

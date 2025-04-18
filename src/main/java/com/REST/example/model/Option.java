@@ -1,5 +1,6 @@
 package com.REST.example.model;
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -8,6 +9,7 @@ import lombok.*;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Schema(description = "API response", example = " ")
 public class Option {
     @Id
     @Column(name = "option_id")

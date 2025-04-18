@@ -60,7 +60,6 @@ public class PollService {
 
     @Transactional
     public void delete(Long pollId) {
-        pollIsExist(pollId);
         pollRepository.deleteById(pollId);
     }
 

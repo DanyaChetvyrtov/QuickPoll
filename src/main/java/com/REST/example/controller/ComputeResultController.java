@@ -4,6 +4,8 @@ import com.REST.example.dto.OptionCount;
 import com.REST.example.dto.VoteResult;
 import com.REST.example.model.Vote;
 import com.REST.example.repository.VoteRepository;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,6 +24,8 @@ public class ComputeResultController {
     }
 
     @GetMapping("/computeresult")
+    @Operation(description = "require pollId in request params. Calculate result for specific poll", summary = "Compute poll result")
+    @ApiResponse(responseCode = "200", description = "List of polls")
     public ResponseEntity<?> computeResult(@RequestParam(name = "pollId") Long pollId) {
         VoteResult voteResult = new VoteResult();
         Iterable<Vote> allVotes = voteRepository.findAllByPollId(pollId);
