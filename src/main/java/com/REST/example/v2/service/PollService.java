@@ -1,18 +1,17 @@
-package com.REST.example.service;
+package com.REST.example.v2.service;
 
 import com.REST.example.dto.PollRequest;
 import com.REST.example.model.Option;
 import com.REST.example.model.Poll;
 import com.REST.example.model.exception.ResourceNotFoundException;
-import com.REST.example.repository.OptionRepository;
-import com.REST.example.repository.PollRepository;
+import com.REST.example.v2.repository.OptionRepository;
+import com.REST.example.v2.repository.PollRepository;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
-import java.util.List;
-
-@Service
+@Service("pollServiceV2")
 @Transactional(readOnly = true)
 public class PollService {
     private PollRepository pollRepository;
@@ -23,10 +22,8 @@ public class PollService {
         this.optionRepository = optionRepository;
     }
 
-    public List<Poll> getAllPolls() {
-        List<Poll> result = new ArrayList<>();
-        pollRepository.findAll().forEach(result::add);
-        return result;
+    public Page<Poll> getAllPolls(Pageable pageable) {
+        return pollRepository.findAll(pageable);
     }
 
     public Poll getById(Long pollId) {

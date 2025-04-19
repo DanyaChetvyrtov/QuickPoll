@@ -1,7 +1,7 @@
 package com.REST.example.v2.controller;
 
 import com.REST.example.model.Vote;
-import com.REST.example.repository.VoteRepository;
+import com.REST.example.v2.repository.VoteRepository;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;

@@ -2,11 +2,13 @@ package com.REST.example.v2.controller;
 
 import com.REST.example.dto.PollRequest;
 import com.REST.example.model.Poll;
-import com.REST.example.service.PollService;
+import com.REST.example.v2.service.PollService;
 import com.REST.example.validation.OnCreate;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,7 +17,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
-import java.util.List;
 
 @RestController("pollControllerV2")
 @RequestMapping("/v2")
@@ -30,8 +31,8 @@ public class PollController {
     @GetMapping("/polls")
     @Operation(description = "returns all the available polls in db", summary = "Returns polls")
     @ApiResponse(responseCode = "200", description = "List of polls")
-    public ResponseEntity<List<Poll>> getAllPolls() {
-        return new ResponseEntity<>(pollService.getAllPolls(), HttpStatus.OK);
+    public ResponseEntity<Page<Poll>> getAllPolls(Pageable pageable) {
+        return new ResponseEntity<>(pollService.getAllPolls(pageable), HttpStatus.OK);
     }
 
     @GetMapping("/polls/{pollId}")

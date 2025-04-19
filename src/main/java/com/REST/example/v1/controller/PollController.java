@@ -2,7 +2,7 @@ package com.REST.example.v1.controller;
 
 import com.REST.example.dto.PollRequest;
 import com.REST.example.model.Poll;
-import com.REST.example.service.PollService;
+import com.REST.example.v1.service.PollService;
 import com.REST.example.validation.OnCreate;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
