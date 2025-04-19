@@ -1,9 +1,10 @@
-package com.REST.example.controller;
+package com.REST.example.v1.controller;
 
 import com.REST.example.model.Vote;
 import com.REST.example.repository.VoteRepository;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,7 +14,9 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import java.util.ArrayList;
 import java.util.List;
 
-@RestController
+@RestController("voteControllerV1")
+@RequestMapping("/v1")
+@Tag(name = "vote-controller", description = "Controller for Vote entity")
 public class VoteController {
     private final VoteRepository voteRepository;
 

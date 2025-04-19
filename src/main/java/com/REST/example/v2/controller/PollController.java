@@ -1,4 +1,4 @@
-package com.REST.example.controller;
+package com.REST.example.v2.controller;
 
 import com.REST.example.dto.PollRequest;
 import com.REST.example.model.Poll;
@@ -17,7 +17,8 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import java.net.URI;
 import java.util.List;
 
-@RestController
+@RestController("pollControllerV2")
+@RequestMapping("/v2")
 @Tag(name = "poll-controller", description = "Controller for poll entity manipulation")
 public class PollController {
     private PollService pollService;
@@ -71,7 +72,7 @@ public class PollController {
     @DeleteMapping("/polls/{pollId}")
     @Operation(description = "require pollId & delete entity if it exists", summary = "Creates new poll")
     @ApiResponse(responseCode = "200", description = "Poll deleted")
-    public ResponseEntity<?> deletePoll(@PathVariable("pollId") Long pollId){
+    public ResponseEntity<?> deletePoll(@PathVariable("pollId") Long pollId) {
         pollService.delete(pollId);
         return new ResponseEntity<>(HttpStatus.OK);
     }
