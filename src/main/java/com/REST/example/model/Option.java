@@ -18,4 +18,8 @@ public class Option {
 
     @Column(name = "option_value")
     private String value;
+
+    public Option(String value) {
+        this.value = value;
+    }
 }
