@@ -18,14 +18,17 @@ repositories {
 }
 
 dependencies {
+	// Стартеры
 	implementation("org.springframework.boot:spring-boot-starter-web")
 	implementation("org.springframework.boot:spring-boot-starter-data-jpa")
 	implementation("org.springframework.boot:spring-boot-starter-validation")
 	implementation("org.springframework.boot:spring-boot-starter-security")
 
+	// Работа с бд
 	implementation("org.postgresql:postgresql:42.7.4")
 	implementation("org.liquibase:liquibase-core:4.31.0")
 
+	// Тесты
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
 	testRuntimeOnly("org.junit.platform:junit-platform-launcher")
 
